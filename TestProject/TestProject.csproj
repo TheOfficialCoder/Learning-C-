@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>TestProject.PrgmWriteInFile</StartupObject>
+    <StartupObject>TestProject.PrgmWriteStudentDetailsInMultipleCSV</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PrgmWriteInFile.cs" />
+    <Compile Include="PrgmWriteStudentDetailsInMultipleCSV.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

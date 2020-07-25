@@ -11,7 +11,7 @@ namespace TestProject
     {
         static void Main(string[] args)
         {
-            int totalrows = 100000;   //Total data to write
+            int totalrows = 100001;   //Total data to write
             int maxrows = int.Parse(Console.ReadLine());    //Maximum rows to write in a file
             int maxfile = 0;    //Maximum file needed
             int selectedrow = 0;  //Select row till which we need to write in single file
@@ -30,30 +30,31 @@ namespace TestProject
                 selectedrow += maxrows;
                 if (selectedrow > totalrows)
                     selectedrow = totalrows;
-                //Create csv file
-                filename = DateTime.UtcNow.ToString("ddMMyyyyhhmm")+"-" + i + " of " + maxfile + ".csv";
-                //Full File Path
-                filepath = folder + filename;
-                using (StreamWriter sw = new StreamWriter(new FileStream(filepath, FileMode.Create, FileAccess.Write)))
+
+                filename = DateTime.UtcNow.ToString("ddMMyyyyhhmm") + "-" + i + " of " + maxfile + ".csv";
+                filepath = folder + filename;   //Full File Path
+                for (int j = executedrow; j <= selectedrow; j++)
                 {
-                    try
-                    {
-                        sw.WriteLine("Numbers" + "\n");
-                        for (int j = executedrow; j <= selectedrow; j++)
-                        {
-                            data += j + "\n";
-                            //Console.WriteLine(executedrow);
-                            executedrow++;
-                        }
-                        sw.WriteLine(data);
-                    }
-                    finally
-                    {
-                        sw.Close();
-                    }
-                    Console.WriteLine(data);
-                    data = "";
-                    
+                    data += j + "\n";
+                    executedrow++;
+                }
+                WriteDataInCSVFile(data, filepath);
+                data = "";
+            }
+        }
+
+        private static void WriteDataInCSVFile(string data, string filepath)
+        {
+            using (StreamWriter sw = new StreamWriter(new FileStream(filepath, FileMode.Create, FileAccess.Write)))
+            {
+                try
+                {
+                    sw.WriteLine("Numbers" + "\n");
+                    sw.WriteLine(data);
+                }
+                finally
+                {
+                    sw.Close();
                 }
             }
         }
